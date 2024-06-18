@@ -35,6 +35,7 @@ return {
           input = { view = 'cmdline_input', icon = '󰥻 ' }, -- Used by input()
         },
       },
+      vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupBorder', { fg = '#272727' }),
     }
   end,
 }

@@ -55,7 +55,6 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
-
         sorting = {
           priority_weight = 2,
           comparators = {
@@ -75,6 +74,19 @@ return {
           },
         },
         completion = { completeopt = 'menu,menuone,noinsert' },
+
+        window = {
+          completion = cmp.config.window.bordered {
+            winhighlight = 'Normal:Pmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None',
+          },
+          documentation = cmp.config.window.bordered {
+            winhighlight = 'Normal:Pmenu,FloatBorder:CmpDocBorder,CursorLine:PmenuSel,Search:None',
+          },
+        },
+        vim.api.nvim_set_hl(0, 'CmpBorder', { fg = '#272727', bg = '#0f0f0f' }),
+        vim.api.nvim_set_hl(0, 'CmpDocBorder', { fg = '#272727', bg = '#0f0f0f' }),
+        vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#272727' }),
+        vim.api.nvim_set_hl(0, 'Pmenu', { fg = '#272727', bg = '#0f0f0f' }),
 
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`

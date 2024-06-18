@@ -16,7 +16,7 @@ return {
           icons = {
             idle = '',
             error = '',
-            offline = '',
+            offline = '',
             warning = '',
             loading = '',
           },

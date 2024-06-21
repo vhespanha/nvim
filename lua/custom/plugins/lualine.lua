@@ -52,84 +52,100 @@ return {
   'nvim-lualine/lualine.nvim',
   dependencies = {
     'nvim-tree/nvim-web-devicons',
+    { 'abeldekat/harpoonline', version = '*' },
   },
-  -- See `:help lualine.txt`
-  opts = {
-    extensions = { 'nvim-tree', 'trouble', 'toggleterm' },
-    options = {
-      disabled_filetypes = { 'packer', 'NVimTree', 'NvimTree_1', 'quickfix', 'prompt', 'lazy', 'symbols-outline' },
-      icons_enabled = true,
-      theme = lualine_dngh,
-      component_separators = '',
-      section_separators = '',
-    },
-    sections = {
-      lualine_a = {
-        {
-          'mode',
-          fmt = function()
-            -- Define the icons for each mode
-            local mode_icons = {
-              n = '', -- Normal mode
-              i = '', -- Insert mode
-              v = '', -- Visual mode
-              [''] = '', -- Visual block mode (requires special handling)
-              V = '', -- Visual line mode
-              c = '', -- Command mode
-              R = '', -- Replace mode
-              t = '', -- Terminal mode
-            }
 
-            -- Get the current mode
-            local mode = vim.fn.mode()
+  config = function()
+    local Harpoonline = require 'harpoonline'
 
-            -- Return the corresponding icon
-            return mode_icons[mode] or mode:sub(1, 1) -- Fallback to first character of mode if no icon found
+    Harpoonline.setup {
+      formatter_opts = {
+        default = { -- remove all spaces...
+          inactive = '󰄰 ',
+          active = '󰄯 ',
+        },
+      },
+      icon = '',
+      on_update = function()
+        require('lualine').refresh()
+      end,
+    }
+
+    local harpoonline = { Harpoonline.format }
+    require('lualine').setup {
+
+      extensions = { 'nvim-tree', 'trouble', 'toggleterm' },
+      options = {
+        disabled_filetypes = { 'packer', 'NVimTree', 'NvimTree_1', 'quickfix', 'prompt', 'lazy', 'symbols-outline' },
+        icons_enabled = true,
+        theme = lualine_dngh,
+        component_separators = '',
+        section_separators = '',
+      },
+      sections = {
+        lualine_a = {
+          {
+            'mode',
+            fmt = function()
+              -- Define the icons for each mode
+              local mode_icons = {
+                n = '', -- Normal mode
+                i = '', -- Insert mode
+                v = '', -- Visual mode
+                [''] = '', -- Visual block mode (requires special handling)
+                V = '', -- Visual line mode
+                c = '', -- Command mode
+                R = '', -- Replace mode
+                t = '', -- Terminal mode
+              }
+
+              -- Get the current mode
+              local mode = vim.fn.mode()
+
+              -- Return the corresponding icon
+              return mode_icons[mode] or mode:sub(1, 1) -- Fallback to first character of mode if no icon found
+            end,
+          },
+        },
+        lualine_b = {
+          'filename',
+          {
+            'branch',
+            icon = '',
+          },
+        },
+        lualine_c = {
+          function()
+            return require('tinygit.statusline').branchState()
           end,
         },
-      },
-      lualine_b = {
-        {
-          'filetype',
-          colored = false,
-          icon_only = true,
-          icon = { align = 'right' },
-          padding = { left = 2, right = 0 },
+        lualine_x = {
+          harpoonline,
         },
-        'filename',
-        {
-          'branch',
-          icon = '',
+        lualine_y = {
+
+          copilot_status,
         },
-      },
-      lualine_c = {
-        function()
-          return require('tinygit.statusline').branchState()
-        end,
-      },
-      lualine_x = {
-        copilot_status,
-      },
-      lualine_y = {},
-      lualine_z = {
-        {
-          'diagnostics',
+        lualine_z = {
+          {
+            'diagnostics',
 
-          -- Table of diagnostic sources, available sources are:
-          --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
-          -- or a function that returns a table as such:
-          --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
-          sources = { 'nvim_diagnostic', 'coc' },
+            -- Table of diagnostic sources, available sources are:
+            --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
+            -- or a function that returns a table as such:
+            --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
+            sources = { 'nvim_diagnostic', 'coc', 'nvim_lsp' },
 
-          -- Displays diagnostics for the defined severity types
-          sections = { 'error', 'warn', 'hint' },
+            -- Displays diagnostics for the defined severity types
+            sections = { 'error', 'warn', 'hint' },
 
-          symbols = { error = ' ', warn = ' ', hint = ' ' },
-          colored = false, -- Displays diagnostics status in color if set to true.
-          update_in_insert = true, -- Update diagnostics in insert mode.
-          always_visible = true, -- Show diagnostics even if there are none.
+            symbols = { error = ' ', warn = ' ', hint = ' ' },
+            colored = false, -- Displays diagnostics status in color if set to true.
+            update_in_insert = true, -- Update diagnostics in insert mode.
+            always_visible = true, -- Show diagnostics even if there are none.
+          },
         },
       },
-    },
-  },
+    }
+  end,
 }

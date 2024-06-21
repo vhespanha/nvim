@@ -57,7 +57,7 @@ vim.o.signcolumn = 'no'
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '· ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -68,13 +68,18 @@ vim.opt.cursorline = false
 -- Hide the built-in command-line
 vim.o.cmdheight = 0
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'json',
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.json',
   callback = function()
-    vim.bo.tabstop = 2
-    vim.bo.shiftwidth = 2
-    vim.bo.expandtab = true
+    vim.bo.filetype = 'jsonc'
   end,
 })
 
+-- -- Override specific files to use json filetype
+-- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+--   pattern = {'example.json', 'anotherfile.json'},
+--   callback = function()
+--     vim.bo.filetype = 'json'
+--   end,
+-- })
 -- vim: ts=2 sts=2 sw=2 et

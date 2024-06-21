@@ -10,9 +10,8 @@ return {
       autochdir = true,
       float_opts = {
         border = 'curved',
-        width = 100,
+        width = 160,
         height = 50,
-        winblend = 10,
       },
       highlights = {
         FloatBorder = {
@@ -21,5 +20,9 @@ return {
         },
       },
     }
+    -- Additional check to ensure the key mapping is set correctly
+    vim.api.nvim_set_keymap('n', '<c-t>', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('i', '<c-t>', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('t', '<c-t>', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true })
   end,
 }

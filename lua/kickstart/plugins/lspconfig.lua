@@ -160,11 +160,6 @@ return {
         clangd = {},
         gopls = {
           gofumpt = true,
-          format = {
-            goimports = true,
-            gofumpt = true,
-            goline = true,
-          },
         },
         pyright = {},
         rust_analyzer = {},

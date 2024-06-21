@@ -35,29 +35,18 @@ return {
       toggle_telescope(harpoon:list())
     end, { desc = 'Open harpoon window' })
 
-    vim.keymap.set('n', '<C-1>', function()
-      harpoon:list():select(1)
-    end)
+    -- Generate mappings
+    local mappings = {}
+    for i = 1, 9 do
+      local key = '' .. tostring(i)
+      mappings[key] = function()
+        harpoon:list():select(i)
+      end
+    end
 
-    vim.keymap.set('n', '<C-2>', function()
-      harpoon:list():select(2)
-    end)
-
-    vim.keymap.set('n', '<C-3>', function()
-      harpoon:list():select(3)
-    end)
-
-    vim.keymap.set('n', '<C-4>', function()
-      harpoon:list():select(4)
-    end)
-
-    -- Toggle previous & next buffers stored within Harpoon list
-    vim.keymap.set('n', '<M-Up>', function()
-      harpoon:list():prev()
-    end)
-
-    vim.keymap.set('n', '<M-Down>', function()
-      harpoon:list():next()
-    end)
+    -- Apply mappings
+    for key, action in pairs(mappings) do
+      vim.keymap.set('n', key, action)
+    end
   end,
 }

@@ -14,6 +14,14 @@ return {
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+      current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+        delay = 250,
+        ignore_whitespace = false,
+        virt_text_priority = 100,
+      },
       on_attach = function(bufnr)
         local gitsigns = require 'gitsigns'
 
@@ -65,6 +73,8 @@ return {
         map('n', '<leader>tD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
       end,
     },
+
+    vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { link = 'Comment' }),
   },
 }
 -- vim: ts=2 sts=2 sw=2 et

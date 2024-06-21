@@ -34,7 +34,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'no'
+vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
 vim.opt.updatetime = 250
@@ -50,8 +50,6 @@ vim.opt.splitbelow = true
 vim.opt.termguicolors = true
 
 vim.opt.showtabline = 0
-
-vim.o.signcolumn = 'no'
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`

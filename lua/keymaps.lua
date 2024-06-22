@@ -48,4 +48,31 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+local function create_conventional_commit()
+  local actions = require 'telescope._extensions.conventional_commits.actions'
+  local picker = require 'telescope._extensions.conventional_commits.picker'
+  local themes = require 'telescope.themes'
+
+  -- if you use the picker directly you have to provide your theme manually
+  local opts = {
+    action = actions.prompt,
+    include_body_and_footer = true,
+  }
+  opts = vim.tbl_extend('force', opts, themes['get_dropdown']())
+  picker(opts)
+end
+
+local function telescope_tinygit_commit()
+  local commit_message = require('telescope').extensions.conventional_commits.conventional_commits()
+  if commit_message then
+    require('tinygit').smartCommit(commit_message)
+  end
+end
+
+vim.keymap.set('n', '<Leader>gc', telescope_tinygit_commit, { desc = 'Conventional commit with tinygit' })
+vim.keymap.set('n', '<Leader>ga', '<cmd>Gitsigns add_hunk<CR>') -- gitsigns.nvim
+vim.keymap.set('n', '<Leader>gp', function()
+  require('tinygit').push()
+end)
+
 -- vim: ts=2 sts=2 sw=2 et

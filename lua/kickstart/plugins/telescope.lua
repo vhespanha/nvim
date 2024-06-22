@@ -12,6 +12,7 @@ return {
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'olacin/telescope-cc.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
         'nvim-telescope/telescope-fzf-native.nvim',
 
@@ -68,6 +69,10 @@ return {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          conventional_commits = {
+            theme = 'dropdown', -- custom theme
+            include_body_and_footer = true, -- Add prompts for commit body and footer
+          },
           file_browser = {
             theme = 'dropdown',
             -- disables netrw and use telescope-file-browser in its place
@@ -83,6 +88,7 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       require('telescope').load_extension 'file_browser'
+      require('telescope').load_extension 'conventional_commits'
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'

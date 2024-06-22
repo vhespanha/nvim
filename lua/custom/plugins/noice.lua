@@ -19,6 +19,7 @@ return {
           },
         },
         popupmenu = {
+          -- relative = 'editor', -- "'cursor'"|"'editor'"|"'win'"
           position = {
             row = 'auto', -- Popup will show up below the cmdline automatically
             col = 'auto',

@@ -48,9 +48,25 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.keymap.set('n', '<Leader>gc', function()
-  require('telescope').extensions.conventional_commits.conventional_commits()
-end, { desc = '[G]it Conventional [C]ommit' })
+local function create_and_commit_conventional_commit()
+  local actions = require 'telescope._extensions.conventional_commits.actions'
+  local picker = require 'telescope._extensions.conventional_commits.picker'
+  local themes = require 'telescope.themes'
+
+  local opts = {
+    action = function(selected_entry)
+      local commit_message = selected_entry.value
+      -- Pass the commit_message to tinygit for committing
+      require('tinygit').smartCommit { message = commit_message }
+    end,
+    include_body_and_footer = true,
+  }
+  opts = vim.tbl_extend('force', opts, themes['get_dropdown']())
+  picker(opts)
+end
+
+vim.keymap.set('n', '<Leader>gc', create_and_commit_conventional_commit, { desc = '[G]it Conventional [C]ommit' })
+
 vim.keymap.set('n', '<Leader>ga', '<cmd>Gitsigns add_hunk<CR>') -- gitsigns.nvim
 vim.keymap.set('n', '<Leader>gp', function()
   require('tinygit').push()

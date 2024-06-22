@@ -62,4 +62,12 @@ end, { desc = '[G]it [P]ush' })
 vim.keymap.set('n', '<leader>pr', function()
   require('tinygit').createGitHubPr()
 end, { desc = 'Create [P]ull [R]equest' })
+
+-- Replace tokens in the current buffer
+vim.api.nvim_set_keymap('n', '<leader>rr', [[:lua ReplaceTokens()<CR>]], { noremap = true, silent = true })
+function ReplaceTokens()
+  local search = vim.fn.input 'Search for: '
+  local replace = vim.fn.input 'Replace with: '
+  vim.cmd('%s/' .. search .. '/' .. replace .. '/g')
+end
 -- vim: ts=2 sts=2 sw=2 et

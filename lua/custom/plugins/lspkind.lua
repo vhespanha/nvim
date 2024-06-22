@@ -4,6 +4,11 @@ return {
     local cmp = require 'cmp'
     local lspkind = require 'lspkind'
 
+    -- Define the highlight group
+    vim.cmd [[
+      highlight! LspKindIcon guifg=#e6edf3
+    ]]
+
     cmp.setup {
       formatting = {
         fields = { 'kind', 'abbr', 'menu' },
@@ -14,8 +19,9 @@ return {
           preset = 'codicons',
           maxwidth = 50,
           ellipsis_char = '...',
-          show_labelDetails = true,
+          show_label_details = true,
           before = function(entry, vim_item)
+            vim_item.kind_hl_group = 'LspKindIcon'
             return vim_item
           end,
         },

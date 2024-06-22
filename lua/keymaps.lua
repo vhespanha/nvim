@@ -50,11 +50,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Git keymaps
 vim.api.nvim_set_keymap('n', '<leader>ga', ':!git add .<CR>', { noremap = true, silent = true })
+
 vim.keymap.set('n', '<Leader>gc', function()
   require('telescope').extensions.conventional_commits.conventional_commits()
 end, { desc = '[G]it Conventional [C]ommit' })
+
 vim.keymap.set('n', '<Leader>gp', function()
   require('tinygit').push()
-end)
+end, { desc = '[G]it [P]ush' })
 
+vim.keymap.set('n', '<leader>pr', function()
+  require('tinygit').createGitHubPr()
+end, { desc = 'Create [P]ull [R]equest' })
 -- vim: ts=2 sts=2 sw=2 et

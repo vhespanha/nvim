@@ -48,6 +48,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Git keymaps
+vim.keymap.set('n', '<Leader>gC', function()
+  require('tinygit').smartCommit()
+end)
 vim.api.nvim_set_keymap('n', '<leader>ga', ':git add.<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Leader>gc', function()
   require('telescope').extensions.conventional_commits.conventional_commits()

@@ -8,6 +8,23 @@ return {
   },
   config = function()
     require('noice').setup {
+      views = {
+        cmdline_popup = {
+          backend = 'popup',
+          relative = 'editor',
+          zindex = 200,
+          position = {
+            row = '40%', -- 40% from top of the screen. This will position it almost at the center.
+            col = '50%',
+          },
+        },
+        popupmenu = {
+          position = {
+            row = 'auto', -- Popup will show up below the cmdline automatically
+            col = 'auto',
+          },
+        },
+      },
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {

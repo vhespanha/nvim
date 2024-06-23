@@ -10,16 +10,11 @@ return {
         highlight = 'CursorColumn',
         hide_if_all_visible = true, -- Hides handle if all lines are visible
       },
-      marks = {
-        Cursor = {
-          text = '',
-        },
-      },
       excluded_buftypes = {
         'terminal',
       },
       handlers = {
-        cursor = true,
+        cursor = false,
         diagnostic = true,
         gitsigns = true, -- Requires gitsigns
         handle = true,

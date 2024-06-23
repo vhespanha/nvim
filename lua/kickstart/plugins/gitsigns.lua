@@ -23,6 +23,7 @@ return {
         virt_text_priority = 100,
       },
       on_attach = function(bufnr)
+        require('scrollbar.handlers.gitsigns').setup()
         local gitsigns = require 'gitsigns'
 
         local function map(mode, l, r, opts)

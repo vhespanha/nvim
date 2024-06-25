@@ -6,7 +6,10 @@ return {
       {
         '<leader>f',
         function()
-          require('conform').format { async = true, lsp_fallback = true }
+          require('conform').format {
+            async = true,
+            lsp_fallback = true,
+          }
         end,
         mode = '',
         desc = '[F]ormat buffer',
@@ -33,14 +36,11 @@ return {
         javacriptreact = { { 'prettierd', 'prettier' }, 'eslintd_d' },
         ['typescript.jsx'] = { { 'prettierd', 'prettier' }, 'eslintd_d' },
         ['javacript.jsx'] = { { 'prettierd', 'prettier' }, 'eslintd_d' },
-        json = { { 'prettierd', 'prettier' }, 'eslintd_d' },
-        jsonc = { { 'prettierd', 'prettier' }, 'eslintd_d' },
         svelte = { { 'prettierd', 'prettier' }, 'eslintd_d' },
         yaml = { { 'prettierd', 'prettier' }, 'eslintd_d' },
         css = { { 'prettierd', 'prettier' }, 'eslintd_d' },
         html = { { 'prettierd', 'prettier' }, 'eslintd_d' },
         python = { 'isort', 'black' },
-        ['_'] = { 'trim_whitespace' },
       },
       vim.api.nvim_create_autocmd('BufWritePre', {
         pattern = '*',

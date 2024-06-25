@@ -1,7 +1,3 @@
-local copilot_status = function()
-  return require('copilot_status').status_string()
-end
-
 local colors = {
   bg = '#0f0f0f',
   fg = '#6a737d',
@@ -119,12 +115,9 @@ return {
             return require('tinygit.statusline').branchState()
           end,
         },
-        lualine_x = {
-          harpoonline,
-        },
+        lualine_x = {},
         lualine_y = {
-
-          copilot_status,
+          harpoonline,
         },
         lualine_z = {
           {

@@ -73,6 +73,8 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   end,
 })
 
+vim.wo.wrap = false
+
 -- -- Override specific files to use json filetype
 -- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
 --   pattern = {'example.json', 'anotherfile.json'},

@@ -106,7 +106,7 @@ return {
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.confirm { select = true },
           ['<Down>'] = vim.schedule_wrap(function(fallback)
             if cmp.visible() and has_words_before() then
               cmp.select_next_item { behavior = cmp.SelectBehavior.Select }

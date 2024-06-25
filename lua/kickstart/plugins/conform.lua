@@ -29,7 +29,7 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        go = { 'goimports', 'gofumpt', 'golines' },
+        go = { 'goimports', 'gofumpt' },
         javascript = { { 'prettierd', 'prettier' }, 'eslintd_d' },
         typescript = { { 'prettierd', 'prettier' }, 'eslintd_d' },
         typescriptreact = { { 'prettierd', 'prettier' }, 'eslintd_d' },

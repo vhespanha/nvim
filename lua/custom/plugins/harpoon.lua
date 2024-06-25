@@ -1,30 +1,41 @@
 return {
   'ThePrimeagen/harpoon',
   branch = 'harpoon2',
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
 
   config = function()
     local harpoon = require 'harpoon'
+    local telescope = require 'telescope'
+    local actions = require 'telescope.actions'
+    local action_state = require 'telescope.actions.state'
+    local themes = require 'telescope.themes'
 
     harpoon:setup()
 
-    local conf = require('telescope.config').values
     local function toggle_telescope(harpoon_files)
       local file_paths = {}
       for _, item in ipairs(harpoon_files.items) do
         table.insert(file_paths, item.value)
       end
 
-      require('telescope.pickers')
-        .new({}, {
-          prompt_title = 'Harpoon',
-          finder = require('telescope.finders').new_table {
-            results = file_paths,
-          },
-          previewer = conf.file_previewer {},
-          sorter = conf.generic_sorter {},
-        })
-        :find()
+      local opts = themes.get_dropdown {
+        prompt_title = 'Harpoon',
+        finder = require('telescope.finders').new_table {
+          results = file_paths,
+        },
+        previewer = false,
+        sorter = require('telescope.config').values.generic_sorter {},
+        attach_mappings = function(prompt_bufnr, map)
+          map('i', '<CR>', function()
+            local selection = action_state.get_selected_entry()
+            actions.close(prompt_bufnr)
+            vim.cmd('edit ' .. selection.value)
+          end)
+          return true
+        end,
+      }
+
+      require('telescope.pickers').new({}, opts):find()
     end
 
     vim.keymap.set('n', '<leader>a', function()

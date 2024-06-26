@@ -40,7 +40,11 @@ return {
 
     vim.keymap.set('n', '<leader>a', function()
       harpoon:list():add()
-    end)
+    end, { desc = '[A]dd to Harpoon' })
+
+    vim.keymap.set('n', '<leader>q', function()
+      harpoon:list():remove()
+    end, { desc = '[Q]uit from harpoon' })
 
     vim.keymap.set('n', '<C-e>', function()
       toggle_telescope(harpoon:list())

@@ -38,11 +38,11 @@ return {
       require('telescope.pickers').new({}, opts):find()
     end
 
-    vim.keymap.set('n', '<leader>a', function()
+    vim.keymap.set('n', '<leader>e', function()
       harpoon:list():add()
-    end, { desc = '[A]dd to Harpoon' })
+    end, { desc = '[E]nter buffer to Harpoon' })
 
-    vim.keymap.set('n', '<leader>q', function()
+    vim.keymap.set('n', '<leader>qe', function()
       harpoon:list():remove()
     end, { desc = '[Q]uit from harpoon' })
 

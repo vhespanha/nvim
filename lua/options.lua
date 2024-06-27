@@ -51,6 +51,9 @@ vim.opt.termguicolors = true
 
 vim.opt.showtabline = 0
 
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`

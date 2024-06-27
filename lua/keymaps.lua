@@ -8,8 +8,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -80,13 +80,8 @@ vim.keymap.set('n', '<leader>ww', function()
 end)
 
 -- Close buffer
-vim.keymap.set('n', '<leader>qq', function()
+vim.keymap.set('n', '<leader>wq', function()
   vim.cmd [[Sayonara]]
-end)
-
--- Close buffer
-vim.keymap.set('n', '<leader>qw', function()
-  vim.cmd [[Sayonara!]]
 end)
 
 vim.keymap.set('n', '<C-j>', '}', { desc = 'Jump To Blank Line Down' })

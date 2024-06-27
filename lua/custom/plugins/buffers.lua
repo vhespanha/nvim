@@ -1,7 +1,23 @@
 return {
   'ThePrimeagen/harpoon',
   branch = 'harpoon2',
-  dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope.nvim',
+    'mhinz/vim-sayonara',
+    {
+      'axkirillov/hbac.nvim',
+      config = function()
+        require('hbac').setup {
+          autoclose = true, -- set autoclose to false if you want to close manually
+          threshold = 10, -- hbac will start closing unedited buffers once that number is reached
+          close_command = function(bufnr)
+            vim.api.nvim_buf_delete(bufnr, {})
+          end,
+        }
+      end,
+    },
+  },
 
   config = function()
     local harpoon = require 'harpoon'
@@ -38,12 +54,16 @@ return {
       require('telescope.pickers').new({}, opts):find()
     end
 
-    vim.keymap.set('n', '<leader>e', function()
+    local hbac = require 'hbac'
+
+    vim.keymap.set('n', '<leader>a', function()
       harpoon:list():add()
+      hbac.toggle_pin()
     end, { desc = '[E]nter buffer to Harpoon' })
 
-    vim.keymap.set('n', '<leader>qe', function()
+    vim.keymap.set('n', '<leader>q', function()
       harpoon:list():remove()
+      hbac.toggle_pin()
     end, { desc = '[Q]uit from harpoon' })
 
     vim.keymap.set('n', '<C-e>', function()

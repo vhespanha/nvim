@@ -56,6 +56,29 @@ return {
 
     local hbac = require 'hbac'
 
+    local last_buffer = nil
+    local current_buffer = vim.api.nvim_get_current_buf()
+
+    -- Autocommand to track buffer changes
+    vim.api.nvim_create_autocmd('BufEnter', {
+      callback = function()
+        last_buffer = current_buffer
+        current_buffer = vim.api.nvim_get_current_buf()
+      end,
+    })
+
+    -- Function to switch to the last visited buffer
+    function switch_to_last_buffer()
+      if last_buffer and vim.api.nvim_buf_is_valid(last_buffer) then
+        vim.api.nvim_set_current_buf(last_buffer)
+      else
+        print 'No valid last buffer to switch to'
+      end
+    end
+
+    -- Map Ctrl+Tab to switch to the last visited buffer
+    vim.api.nvim_set_keymap('n', '<C-Tab>', ':lua switch_to_last_buffer()<CR>', { noremap = true, silent = true })
+
     vim.keymap.set('n', '<leader>a', function()
       harpoon:list():add()
       hbac.toggle_pin()
@@ -71,16 +94,16 @@ return {
     end, { desc = 'Open harpoon window' })
 
     -- Generate mappings
-    local mappings = {}
+    local listmappings = {}
     for i = 1, 9 do
       local key = '' .. tostring(i)
-      mappings[key] = function()
+      listmappings[key] = function()
         harpoon:list():select(i)
       end
     end
 
     -- Apply mappings
-    for key, action in pairs(mappings) do
+    for key, action in pairs(listmappings) do
       vim.keymap.set('n', key, action)
     end
   end,

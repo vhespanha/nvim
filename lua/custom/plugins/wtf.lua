@@ -1,6 +1,5 @@
 return {
   'vhespanha/wtf.nvim',
-  branch = 'feat/api_key_command',
   dependencies = {
     'MunifTanjim/nui.nvim',
   },
@@ -10,7 +9,7 @@ return {
     -- An alternative way to set your API key
     openai_api_key_cmd = 'pass show api/openai/nvim',
     -- ChatGPT Model
-    openai_model_id = 'gpt-4o',
+    openai_model_id = 'gpt-4-turbo',
     -- Send code as well as diagnostics
     context = true,
     -- Set your preferred language for the response

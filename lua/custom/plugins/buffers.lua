@@ -54,8 +54,6 @@ return {
       require('telescope.pickers').new({}, opts):find()
     end
 
-    local hbac = require 'hbac'
-
     -- Switch to last buffer
     vim.keymap.set('n', '<C-Tab>', function()
       vim.cmd 'b #'
@@ -63,12 +61,10 @@ return {
 
     vim.keymap.set('n', '<leader>a', function()
       harpoon:list():add()
-      hbac.toggle_pin()
     end, { desc = '[E]nter buffer to Harpoon' })
 
     vim.keymap.set('n', '<leader>q', function()
       harpoon:list():remove()
-      hbac.toggle_pin()
     end, { desc = '[Q]uit from harpoon' })
 
     vim.keymap.set('n', '<C-e>', function()

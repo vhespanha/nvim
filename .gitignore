@@ -6,5 +6,3 @@ node_modules
 
 spell/
 lazy-lock.json
-# remove later
-lua/custom/plugins/wtf.lua

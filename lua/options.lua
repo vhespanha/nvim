@@ -78,6 +78,8 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 
 vim.wo.wrap = false
 
+vim.opt.sessionoptions:append 'localoptions' -- Save localoptions to session file
+
 -- -- Override specific files to use json filetype
 -- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
 --   pattern = {'example.json', 'anotherfile.json'},

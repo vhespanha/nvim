@@ -4,7 +4,7 @@ return {
     lazy = false,
     keys = {
       {
-        '<leader>f',
+        '<leader>ff',
         function()
           require('conform').format {
             async = true,
@@ -41,6 +41,7 @@ return {
         css = { { 'prettierd', 'prettier' }, 'eslintd_d' },
         html = { { 'prettierd', 'prettier' }, 'eslintd_d' },
         python = { 'isort', 'black' },
+        json = { 'prettier' },
       },
       vim.api.nvim_create_autocmd('BufWritePre', {
         pattern = '*',

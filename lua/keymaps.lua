@@ -84,6 +84,10 @@ vim.keymap.set('n', '<leader>wq', function()
   vim.cmd [[Sayonara]]
 end)
 
+vim.keymap.set('n', '<Leader>fb', function()
+  MiniFiles.open()
+end, { desc = '[F]iles [B]rowser' })
+
 vim.keymap.set('n', '<C-j>', '}', { desc = 'Jump To Blank Line Down' })
 
 vim.keymap.set('n', '<C-k>', '{', { desc = 'Jump To Blank Line Up' })

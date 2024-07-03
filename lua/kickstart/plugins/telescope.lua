@@ -30,8 +30,6 @@ return {
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-
-      { 'nvim-telescope/telescope-file-browser.nvim' },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -73,21 +71,12 @@ return {
             theme = 'dropdown', -- custom theme
             include_body_and_footer = true, -- Add prompts for commit body and footer
           },
-          file_browser = {
-            theme = 'dropdown',
-            -- disables netrw and use telescope-file-browser in its place
-            hijack_netrw = true,
-            hidden = { file_browser = true, folder_browser = true },
-            dir_icon = '',
-            dir_icon_hl = 'Comment',
-          },
         },
       }
 
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      require('telescope').load_extension 'file_browser'
       require('telescope').load_extension 'conventional_commits'
 
       -- See `:help telescope.builtin`
@@ -129,10 +118,6 @@ return {
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
-
-      vim.keymap.set('n', '<space>sb', function()
-        require('telescope').extensions.file_browser.file_browser()
-      end)
     end,
   },
 }

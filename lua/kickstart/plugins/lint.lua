@@ -16,7 +16,6 @@ return {
         ['javacript.jsx'] = { 'eslintd_d' },
         python = { 'pflake8' },
         go = { 'golangcilint' },
-        html = { 'tidy' },
       }
 
       local eslint_d = require('lint').linters.eslint_d

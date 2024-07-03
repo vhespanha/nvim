@@ -7,7 +7,7 @@ return {
   opts = {
     popup_type = 'popup',
     openai_api_key_cmd = 'pass show api/openai/nvim',
-    openai_model_id = 'gpt-3.5-turbo-16k',
+    openai_model_id = 'gpt-4o',
     context = true,
     language = 'english',
     search_engine = 'phind',

@@ -78,6 +78,7 @@ return {
         theme = lualine_dngh,
         component_separators = '',
         section_separators = '',
+        refresh = { statusline = 100 },
       },
       sections = {
         lualine_a = {

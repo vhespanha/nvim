@@ -6,7 +6,7 @@ return {
 
       workspaces = { -- Default workspaces to search for
         { '~/projects', {} },
-        { '.config', {} },
+        { '~/.config', {} },
       },
       -- patterns = { ".git", ".svn", ".hg" },      -- Default patterns to use if none were specified. These are NOT regexps.
       -- store_hooks = { pre = nil, post = nil },   -- pre and post hooks for store_session, callable | nil

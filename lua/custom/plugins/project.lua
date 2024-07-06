@@ -1,5 +1,7 @@
 return {
   'gnikdroy/projections.nvim',
+  dependencies = { 'ahmedkhalf/project.nvim' },
+
   branch = 'pre_release',
   config = function()
     require('projections').setup {

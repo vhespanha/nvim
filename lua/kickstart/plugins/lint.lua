@@ -1,5 +1,4 @@
 return {
-
   {
     'mfussenegger/nvim-lint',
     event = { 'BufReadPre', 'BufNewFile' },
@@ -14,7 +13,7 @@ return {
         typescriptreact = { 'eslint_d' },
         ['typescript.jsx'] = { 'eslintd_d' },
         ['javacript.jsx'] = { 'eslintd_d' },
-        python = { 'pflake8' },
+        python = { 'flake8' },
         go = { 'golangcilint' },
       }
 

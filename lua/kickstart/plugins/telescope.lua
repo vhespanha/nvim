@@ -13,6 +13,7 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'olacin/telescope-cc.nvim',
+      'nvim-telescope/telescope-file-browser.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
         'nvim-telescope/telescope-fzf-native.nvim',
 
@@ -67,6 +68,23 @@ return {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          file_browser = {
+            cwd_to_path = true,
+            select_buffer = true,
+            hidden = { file_browser = true, folder_browser = true },
+            respect_gitignore = vim.fn.executable 'fd' == 1,
+            no_ignore = false,
+            follow_symlinks = false,
+            browse_files = require('telescope._extensions.file_browser.finders').browse_files,
+            browse_folders = require('telescope._extensions.file_browser.finders').browse_folders,
+            dir_icon = '',
+            dir_icon_hl = 'Default',
+            display_stat = { date = false, size = false, mode = false },
+            hijack_netrw = true,
+            use_fd = true,
+            git_status = true,
+            theme = 'dropdown',
+          },
           conventional_commits = {
             theme = 'dropdown', -- custom theme
             include_body_and_footer = true, -- Add prompts for commit body and footer
@@ -78,6 +96,8 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       require('telescope').load_extension 'conventional_commits'
+      require('telescope').load_extension 'file_browser'
+      require('telescope').load_extension 'projects'
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -90,6 +110,13 @@ return {
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+      vim.keymap.set('n', '<space>fb', ':Telescope file_browser path=%:p:h select_buffer=true<CR>')
+      vim.keymap.set('n', '<leader>sp', function()
+        require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown {
+          winblend = 10,
+          previewer = false,
+        })
+      end, { desc = '[S]earch [P]rojects' })
 
       vim.keymap.set('n', '<leader><leader>', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.

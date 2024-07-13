@@ -1,51 +1,16 @@
 return {
-  'gnikdroy/projections.nvim',
-  dependencies = { 'ahmedkhalf/project.nvim' },
-
-  branch = 'pre_release',
+  'ahmedkhalf/project.nvim',
   config = function()
-    require('projections').setup {
-
-      workspaces = { -- Default workspaces to search for
-        { '~/projects', {} },
-        { '~/.config', {} },
-      },
-      -- patterns = { ".git", ".svn", ".hg" },      -- Default patterns to use if none were specified. These are NOT regexps.
-      -- store_hooks = { pre = nil, post = nil },   -- pre and post hooks for store_session, callable | nil
-      -- restore_hooks = { pre = nil, post = nil }, -- pre and post hooks for restore_session, callable | nil
-      -- workspaces_file = "path/to/file",          -- Path to workspaces json file
-      -- sessions_directory = "path/to/dir",        -- Directory where sessions are stored
+    require('project_nvim').setup {
+      manual_mode = false,
+      detection_methods = { 'lsp', 'pattern' },
+      patterns = { '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json' },
+      ignore_lsp = {},
+      exclude_dirs = {},
+      show_hidden = true,
+      silent_chdir = false,
+      scope_chdir = 'global',
+      datapath = vim.fn.stdpath 'data',
     }
-
-    require('telescope').load_extension 'projections'
-    vim.keymap.set('n', '<leader>sp', function()
-      require('telescope').extensions.projections.projections(require('telescope.themes').get_dropdown {})
-    end)
-
-    -- Autostore session on VimExit
-    local Session = require 'projections.session'
-    vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
-      callback = function()
-        local cwd = vim.loop.cwd()
-        if cwd then
-          Session.store(cwd)
-        else
-        end
-      end,
-    })
-
-    -- Switch to project if vim was started in a project dir
-    local switcher = require 'projections.switcher'
-    vim.api.nvim_create_autocmd({ 'VimEnter' }, {
-      callback = function()
-        if vim.fn.argc() == 0 then
-          local cwd = vim.loop.cwd()
-          if cwd then
-            switcher.switch(cwd)
-          else
-          end
-        end
-      end,
-    })
   end,
 }

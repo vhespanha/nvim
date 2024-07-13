@@ -15,7 +15,7 @@ return {
         expandable_indicator = true,
         format = lspkind.cmp_format {
           mode = 'symbol',
-          symbol_map = { Supermaven = '' },
+          symbol_map = { Copilot = '' },
           preset = 'codicons',
           maxwidth = 50,
           ellipsis_char = '...',

@@ -5,109 +5,14 @@ return {
       color_icons = true,
       override_by_extension = {
         ['go'] = {
-          icon = '',
+          icon = '󰟓',
           color = '#58a6ff',
           name = 'Go',
         },
         ['mod'] = {
-          icon = '',
+          icon = '󰟓',
           color = '#ff7b72',
           name = 'Go',
-        },
-        ['js'] = {
-          icon = '',
-          color = '#e3b341',
-          name = 'Js',
-        },
-        ['cjs'] = {
-          icon = '',
-          color = '#3fb950',
-          name = 'Cjs',
-        },
-        ['mjs'] = {
-          icon = '',
-          color = '#be8fff',
-          name = 'Mjs',
-        },
-        ['ts'] = {
-          icon = '',
-          color = '#58a6ff',
-          name = 'Ts',
-        },
-        ['spec.js'] = {
-          icon = '',
-          color = '#e3b341',
-          name = 'SpecJs',
-        },
-        ['spec.jsx'] = {
-          icon = '',
-          color = '#e3b341',
-          name = 'JavaScriptReactSpec',
-        },
-        ['spec.ts'] = {
-          icon = '',
-          color = '#58a6ff',
-          name = 'SpecTs',
-        },
-        ['spec.tsx'] = {
-          icon = '',
-          color = '#58a6ff',
-          name = 'TypeScriptReactSpec',
-        },
-        ['svelte'] = {
-          icon = '',
-          color = '#f0883e',
-          name = 'Svelte',
-        },
-        ['prisma'] = {
-          icon = '',
-          color = '#7d8590',
-          name = 'Prisma',
-        },
-        ['vue'] = {
-          icon = '',
-          color = '#3fb950',
-          name = 'Vue',
-        },
-        ['jsx'] = {
-          icon = '',
-          color = '#e3b341',
-          name = 'Jsx',
-        },
-        ['tsx'] = {
-          icon = '',
-          color = '#58a6ff',
-          name = 'Tsx',
-        },
-        ['sql'] = {
-          icon = '',
-          color = '#7d8590',
-          name = 'SQL',
-        },
-        ['sqlite'] = {
-          icon = '',
-          color = '#58a6ff',
-          name = 'SQLite',
-        },
-        ['sqlite3'] = {
-          icon = '',
-          color = '#3fb950',
-          name = 'SQLite3',
-        },
-        ['html'] = {
-          icon = '',
-          color = '#f0883e',
-          name = 'Html',
-        },
-        ['templ'] = {
-          icon = '',
-          color = '#e3b341',
-          name = 'Templ',
-        },
-        ['png'] = {
-          icon = '',
-          color = '#be8fff',
-          name = 'Png',
         },
       },
     }

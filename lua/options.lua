@@ -15,6 +15,10 @@ vim.opt.relativenumber = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
+vim.g.terminal_emulator = 'alacritty'
+
+vim.env.SSH_AUTH_SOCK = os.getenv 'SSH_AUTH_SOCK'
+
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -64,7 +68,7 @@ vim.opt.listchars = { tab = '· ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.opt.cursorline = false
+vim.opt.cursorline = true
 
 -- Hide the built-in command-line
 vim.o.cmdheight = 0
@@ -77,6 +81,24 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 })
 
 vim.wo.wrap = false
+
+vim.opt.guifont = 'SFMono Nerd Font:h14'
+
+if vim.g.neovide then
+  vim.g.neovide_padding_top = 10
+  vim.g.neovide_padding_bottom = 10
+  vim.g.neovide_padding_right = 10
+  vim.g.neovide_padding_left = 10
+  vim.g.neovide_floating_shadow = false
+  vim.g.neovide_show_border = false
+  vim.g.neovide_position_animation_length = 0
+  vim.g.neovide_refresh_rate = 144
+  vim.g.neovide_confirm_quit = true
+  vim.g.neovide_scroll_animation_length = 0.08
+  vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_cursor_antialiasing = true
+  vim.g.neovide_cursor_smooth_blink = true
+end
 
 vim.opt.sessionoptions:append 'localoptions' -- Save localoptions to session file
 

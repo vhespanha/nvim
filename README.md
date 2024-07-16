@@ -1,3 +1,3 @@
 ```sh
-git clone https://github.com/dam9000/kickstart-modular.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+git clone git@github.com:vhespanha/nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```

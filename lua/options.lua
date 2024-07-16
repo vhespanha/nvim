@@ -4,6 +4,7 @@
 --  For more options, you can see `:help option-list`
 
 vim.opt.laststatus = 3
+
 vim.o.statusline = ''
 
 -- Make line numbers default
@@ -84,29 +85,12 @@ vim.wo.wrap = false
 
 vim.opt.guifont = 'SFMono Nerd Font:h14'
 
-if vim.g.neovide then
-  vim.g.neovide_padding_top = 10
-  vim.g.neovide_padding_bottom = 10
-  vim.g.neovide_padding_right = 10
-  vim.g.neovide_padding_left = 10
-  vim.g.neovide_floating_shadow = false
-  vim.g.neovide_show_border = false
-  vim.g.neovide_position_animation_length = 0
-  vim.g.neovide_refresh_rate = 144
-  vim.g.neovide_confirm_quit = true
-  vim.g.neovide_scroll_animation_length = 0.08
-  vim.g.neovide_cursor_animation_length = 0
-  vim.g.neovide_cursor_antialiasing = true
-  vim.g.neovide_cursor_smooth_blink = true
-end
-
 vim.opt.sessionoptions:append 'localoptions' -- Save localoptions to session file
 
--- -- Override specific files to use json filetype
--- vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
---   pattern = {'example.json', 'anotherfile.json'},
---   callback = function()
---     vim.bo.filetype = 'json'
---   end,
--- })
+vim.cmd [[
+  augroup filetypedetect
+    au! BufRead,BufNewFile .zshrc set filetype=sh
+  augroup END
+]]
+
 -- vim: ts=2 sts=2 sw=2 et

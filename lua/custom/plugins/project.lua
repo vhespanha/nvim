@@ -1,5 +1,5 @@
 return {
-  'ahmedkhalf/project.nvim',
+  'webmandman/project.nvim',
   config = function()
     require('project_nvim').setup {
       manual_mode = false,

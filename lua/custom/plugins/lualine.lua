@@ -67,6 +67,11 @@ return {
       end,
     }
 
+    local function get_current_project()
+      local project_nvim = require 'project_nvim'
+      return project_nvim.get_current_project() or ''
+    end
+
     local harpoonline = { Harpoonline.format }
     local wtf_status = require('wtf').get_status
     require('lualine').setup {
@@ -106,6 +111,7 @@ return {
           },
         },
         lualine_b = {
+          get_current_project, -- Add your custom function here
           'filename',
           {
             'branch',
@@ -128,6 +134,7 @@ return {
           },
         },
         lualine_y = {
+          'progress',
           harpoonline,
         },
         lualine_z = {

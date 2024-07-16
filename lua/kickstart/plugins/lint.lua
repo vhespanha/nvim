@@ -5,7 +5,6 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
         json = { 'jsonlint' },
         javascript = { 'eslint_d' },
         typescript = { 'eslint_d' },
@@ -15,6 +14,8 @@ return {
         ['javacript.jsx'] = { 'eslintd_d' },
         python = { 'flake8' },
         go = { 'golangcilint' },
+        bash = { 'shellcheck' },
+        sh = { 'shellcheck' },
       }
 
       local eslint_d = require('lint').linters.eslint_d

@@ -1,3 +1,3 @@
 return {
-  'mhinz/vim-sayonara',
+	'mhinz/vim-sayonara',
 }

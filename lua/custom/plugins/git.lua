@@ -16,4 +16,7 @@ return {
 		end,
 	},
 	{ 'tpope/vim-fugitive', lazy = true },
+	{
+		'sindrets/diffview.nvim',
+	},
 }

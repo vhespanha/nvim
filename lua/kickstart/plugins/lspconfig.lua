@@ -207,9 +207,6 @@ return {
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				clangd = {},
-				gopls = {
-					gofumpt = true,
-				},
 				pyright = {},
 				rust_analyzer = {},
 				tsserver = {},
@@ -239,6 +236,9 @@ return {
 						Lua = {
 							completion = {
 								callSnippet = 'Replace',
+							},
+							diagnostics = {
+								globals = { 'vim' },
 							},
 							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
 							-- diagnostics = { disable = { 'missing-fields' } },

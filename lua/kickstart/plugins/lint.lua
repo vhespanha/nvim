@@ -13,7 +13,6 @@ return {
 				['typescript.jsx'] = { 'eslintd_d' },
 				['javacript.jsx'] = { 'eslintd_d' },
 				python = { 'flake8' },
-				go = { 'golangcilint' },
 				bash = { 'shellcheck' },
 				sh = { 'shellcheck' },
 			}

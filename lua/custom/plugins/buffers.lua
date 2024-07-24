@@ -4,7 +4,6 @@ return {
 	dependencies = {
 		'nvim-lua/plenary.nvim',
 		'nvim-telescope/telescope.nvim',
-		'mhinz/vim-sayonara',
 		{
 			'axkirillov/hbac.nvim',
 			config = function()

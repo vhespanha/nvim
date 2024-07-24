@@ -27,6 +27,7 @@ return {
 					lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
 				}
 			end,
+			-- Add new line to the end of the file
 			formatters_by_ft = {
 				lua = { 'stylua' },
 				go = { 'goimports', 'gofumpt' },
@@ -36,7 +37,7 @@ return {
 				javacriptreact = { { 'prettierd', 'prettier' }, 'eslintd_d' },
 				['typescript.jsx'] = { { 'prettierd', 'prettier' }, 'eslintd_d' },
 				['javacript.jsx'] = { { 'prettierd', 'prettier' }, 'eslintd_d' },
-				svelte = { { 'prettierd', 'prettier' }, 'eslintd_d' },
+				svelte = { { 'prettier' }, 'eslintd_d' },
 				yaml = { { 'prettierd', 'prettier' }, 'eslintd_d' },
 				css = { { 'prettierd', 'prettier' } },
 				sass = { { 'prettierd', 'prettier' } },

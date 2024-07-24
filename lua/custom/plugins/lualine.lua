@@ -73,7 +73,6 @@ return {
 		end
 
 		local harpoonline = { Harpoonline.format }
-		local wtf_status = require('wtf').get_status
 		require('lualine').setup {
 
 			extensions = { 'nvim-tree', 'trouble', 'toggleterm' },
@@ -131,16 +130,7 @@ return {
 						return require('tinygit.statusline').branchState()
 					end,
 				},
-				lualine_x = {
-					{
-						function()
-							return wtf_status()
-						end,
-						cond = function()
-							return vim.g.wtf_request_running
-						end,
-					},
-				},
+				lualine_x = {},
 				lualine_y = {
 					'progress',
 					harpoonline,

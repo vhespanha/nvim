@@ -56,29 +56,30 @@ return {
 
 			local win_height = vim.api.nvim_get_option 'lines'
 			local art_height = #ascii_art
-			local padding = math.floor((win_height - art_height) / 2)
+			local padding = math.max(0, math.floor((win_height - art_height) / 2))
 			local centered_art = {}
 
-			for _ = 1, padding do
-				table.insert(centered_art, '')
+			if art_height < win_height then
+				for _ = 3, padding do
+					table.insert(centered_art, '')
+				end
 			end
 
 			for _, line in ipairs(ascii_art) do
 				table.insert(centered_art, line)
 			end
 
+			if #centered_art > win_height then
+				centered_art = vim.list_slice(centered_art, 1, win_height)
+			end
+
 			dashboard.section.header.val = centered_art
 			alpha.redraw()
 		end
 
-		-- Initial centering of the ASCII art
 		center_ascii_art()
-
 		dashboard.section.header.opts.hl = 'Comment'
-		-- Set menu
 		dashboard.section.buttons.val = {}
-
-		-- Send config to alpha
 		alpha.setup(dashboard.opts)
 
 		vim.api.nvim_create_autocmd('User', {
@@ -103,8 +104,8 @@ return {
 
 		-- Disable folding on alpha buffer
 		vim.cmd [[
-    autocmd FileType alpha setlocal nofoldenable
-    ]]
+            autocmd FileType alpha setlocal nofoldenable
+        ]]
 
 		-- Re-center ASCII art on window resize
 		vim.api.nvim_create_autocmd('VimResized', {

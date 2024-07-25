@@ -11,6 +11,11 @@ return {
       direction = 'vertical',
       autochdir = true,
       shade_terminals = false,
+      float_opts = {
+        border = 'curved',
+        width = 100,
+        height = 30,
+      },
       highlights = {
         Normal = {
           guibg = '#0f0f0f',

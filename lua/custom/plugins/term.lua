@@ -2,8 +2,31 @@ return {
   'akinsho/toggleterm.nvim',
   version = '*',
   config = function()
+    local function auto_width(term)
+      if term.direction == 'vertical' then
+        local win_width = vim.api.nvim_get_option 'columns'
+        return math.floor(win_width * 0.4)
+      elseif term.direction == 'horizontal' then
+        return 15
+      end
+    end
+
+    local function resize_all_terminals()
+      for _, term in pairs(require('toggleterm.terminal').get_all()) do
+        if term.direction == 'vertical' then
+          local new_size = auto_width(term)
+          term:resize(new_size)
+        end
+      end
+    end
+
+    vim.api.nvim_create_autocmd({ 'VimResized', 'TermOpen', 'TermEnter' }, {
+      pattern = '*',
+      callback = resize_all_terminals,
+    })
+
     require('toggleterm').setup {
-      size = 67,
+      size = auto_width,
       open_mapping = [[<c-t>]], -- toggle terminal with Ctrl-t
       insert_mappings = true, -- open mapping applies in insert mode
       terminal_mappings = true, -- open mapping applies in the opened terminals

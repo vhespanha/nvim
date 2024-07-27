@@ -1,160 +1,182 @@
 local colors = {
-	bg = '#0f0f0f',
-	fg = '#6a737d',
+  bg = '#0f0f0f',
+  fg = '#6a737d',
 
-	blue = '#79b8ff',
-	green = '#85e89d',
-	red = '#f85149',
-	violet = '#b392f0',
-	yellow = '#e3b341',
+  blue = '#79b8ff',
+  green = '#85e89d',
+  red = '#f85149',
+  violet = '#b392f0',
+  yellow = '#e3b341',
 }
 
 local lualine_dngh = {
-	normal = {
-		a = { fg = colors.violet, bg = colors.bg },
-		b = { fg = colors.fg, bg = colors.bg },
-		c = { fg = colors.fg, bg = colors.bg },
-		z = { fg = colors.fg, bg = colors.bg },
-	},
-	insert = {
-		a = { fg = colors.green, bg = colors.bg },
-		b = { fg = colors.fg, bg = colors.bg },
-		c = { fg = colors.fg, bg = colors.bg },
-		z = { fg = colors.fg, bg = colors.bg },
-	},
-	visual = {
-		a = { fg = colors.blue, bg = colors.bg },
-		b = { fg = colors.fg, bg = colors.bg },
-		c = { fg = colors.fg, bg = colors.bg },
-		z = { fg = colors.fg, bg = colors.bg },
-	},
-	replace = {
-		a = { fg = colors.yellow, bg = colors.bg },
-		b = { fg = colors.fg, bg = colors.bg },
-		c = { fg = colors.fg, bg = colors.bg },
-		z = { fg = colors.fg, bg = colors.bg },
-	},
+  normal = {
+    a = { fg = colors.violet, bg = colors.bg },
+    b = { fg = colors.fg, bg = colors.bg },
+    c = { fg = colors.fg, bg = colors.bg },
+    z = { fg = colors.fg, bg = colors.bg },
+  },
+  insert = {
+    a = { fg = colors.green, bg = colors.bg },
+    b = { fg = colors.fg, bg = colors.bg },
+    c = { fg = colors.fg, bg = colors.bg },
+    z = { fg = colors.fg, bg = colors.bg },
+  },
+  visual = {
+    a = { fg = colors.blue, bg = colors.bg },
+    b = { fg = colors.fg, bg = colors.bg },
+    c = { fg = colors.fg, bg = colors.bg },
+    z = { fg = colors.fg, bg = colors.bg },
+  },
+  replace = {
+    a = { fg = colors.yellow, bg = colors.bg },
+    b = { fg = colors.fg, bg = colors.bg },
+    c = { fg = colors.fg, bg = colors.bg },
+    z = { fg = colors.fg, bg = colors.bg },
+  },
 
-	inactive = {
-		a = { fg = colors.fg, bg = colors.bg },
-		b = { fg = colors.fg, bg = colors.bg },
-		c = { fg = colors.fg, bg = colors.bg },
-		z = { fg = colors.fg, bg = colors.bg },
-	},
+  inactive = {
+    a = { fg = colors.fg, bg = colors.bg },
+    b = { fg = colors.fg, bg = colors.bg },
+    c = { fg = colors.fg, bg = colors.bg },
+    z = { fg = colors.fg, bg = colors.bg },
+  },
 }
 
 return {
-	-- Set lualine as statusline
-	'nvim-lualine/lualine.nvim',
-	dependencies = {
-		'nvim-tree/nvim-web-devicons',
-		{ 'abeldekat/harpoonline', version = '*' },
-	},
+  -- Set lualine as statusline
+  'nvim-lualine/lualine.nvim',
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    'ahmedkhalf/project.nvim', -- Correct dependency name
+    { 'abeldekat/harpoonline', version = '*' },
+  },
 
-	config = function()
-		local Harpoonline = require 'harpoonline'
+  config = function()
+    local Harpoonline = require 'harpoonline'
 
-		Harpoonline.setup {
-			formatter_opts = {
-				default = { -- remove all spaces...
-					inactive = '󰄰 ',
-					active = '󰄯 ',
-				},
-			},
-			icon = '',
-			on_update = function()
-				require('lualine').refresh()
-			end,
-		}
+    Harpoonline.setup {
+      formatter_opts = {
+        default = { -- remove all spaces...
+          inactive = '󰄰 ',
+          active = '󰄯 ',
+        },
+      },
+      icon = '',
+      on_update = function()
+        require('lualine').refresh()
+      end,
+    }
 
-		local function get_current_project()
-			local project_nvim = require 'project_nvim'
-			return project_nvim.get_current_project() or ''
-		end
+    local function get_relative_path_from_project_root()
+      local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
+      local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
 
-		local harpoonline = { Harpoonline.format }
-		require('lualine').setup {
+      -- Check if the buffer is a dashboard or an empty fileless buffer
+      if filetype == 'alpha' or buftype == 'nofile' then
+        return ''
+      end
 
-			extensions = { 'nvim-tree', 'trouble', 'toggleterm' },
-			options = {
-				disabled_filetypes = {
-					'packer',
-					'NVimTree',
-					'NvimTree_1',
-					'quickfix',
-					'prompt',
-					'lazy',
-					'symbols-outline',
-				},
-				icons_enabled = true,
-				theme = lualine_dngh,
-				component_separators = '',
-				section_separators = '',
-				refresh = { statusline = 100 },
-			},
-			sections = {
-				lualine_a = {
-					{
-						'mode',
-						fmt = function()
-							-- Define the icons for each mode
-							local mode_icons = {
-								n = '', -- Normal mode
-								i = '', -- Insert mode
-								v = '', -- Visual mode
-								[''] = '', -- Visual block mode (requires special handling)
-								V = '', -- Visual line mode
-								c = '', -- Command mode
-								R = '', -- Replace mode
-								t = '', -- Terminal mode
-							}
+      local project_root = vim.fn.getcwd()
+      if project_root and project_root ~= '' then
+        local file_path = vim.fn.expand '%:p'
+        local relative_path = file_path:sub(#project_root + 2)
+        local project_root_name = vim.fn.fnamemodify(project_root, ':t')
+        return project_root_name .. '/' .. relative_path
+      else
+        return vim.fn.expand '%:p'
+      end
+    end
 
-							-- Get the current mode
-							local mode = vim.fn.mode()
+    local harpoonline = { Harpoonline.format }
+    require('lualine').setup {
+      extensions = { 'nvim-tree', 'trouble', 'toggleterm' },
+      options = {
+        disabled_filetypes = {
+          'packer',
+          'NVimTree',
+          'NvimTree_1',
+          'quickfix',
+          'prompt',
+          'lazy',
+          'symbols-outline',
+          statusline = { 'alpha', 'nofile' },
+          winbar = { 'alpha', 'nofile' },
+        },
+        icons_enabled = true,
+        theme = lualine_dngh,
+        component_separators = '',
+        section_separators = '',
+        refresh = { statusline = 100 },
+      },
+      sections = {
+        lualine_a = {
+          {
+            'mode',
+            fmt = function()
+              -- Define the icons for each mode
+              local mode_icons = {
+                n = '', -- Normal mode
+                i = '', -- Insert mode
+                v = '', -- Visual mode
+                [''] = '', -- Visual block mode (requires special handling)
+                V = '', -- Visual line mode
+                c = '', -- Command mode
+                R = '', -- Replace mode
+                t = '', -- Terminal mode
+              }
 
-							-- Return the corresponding icon
-							return mode_icons[mode] or mode:sub(1, 1) -- Fallback to first character of mode if no icon found
-						end,
-					},
-				},
-				lualine_b = {
-					get_current_project, -- Add your custom function here
-					'filename',
-					{
-						'branch',
-						icon = '',
-					},
-				},
-				lualine_c = {
-					function()
-						return require('tinygit.statusline').branchState()
-					end,
-				},
-				lualine_x = {},
-				lualine_y = {
-					'progress',
-					harpoonline,
-				},
-				lualine_z = {
-					{
-						'diagnostics',
+              -- Get the current mode
+              local mode = vim.fn.mode()
 
-						-- Table of diagnostic sources, available sources are:
-						--   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
-						-- or a function that returns a table as such:
-						--   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
-						sources = { 'nvim_diagnostic', 'coc', 'nvim_lsp' },
+              -- Return the corresponding icon
+              return mode_icons[mode] or mode:sub(1, 1) -- Fallback to first character of mode if no icon found
+            end,
+          },
+        },
+        lualine_b = {
+          {
+            'filename',
+            path = 1, -- 1 means relative path
+            fmt = function()
+              return get_relative_path_from_project_root()
+            end,
+          },
+          {
+            'branch',
+            icon = '',
+          },
+        },
+        lualine_c = {
+          function()
+            return require('tinygit.statusline').branchState()
+          end,
+        },
+        lualine_x = {},
+        lualine_y = {
+          'progress',
+          harpoonline,
+        },
+        lualine_z = {
+          {
+            'diagnostics',
 
-						-- Displays diagnostics for the defined severity types
-						sections = { 'error', 'warn', 'hint' },
+            -- Table of diagnostic sources, available sources are:
+            --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
+            -- or a function that returns a table as such:
+            --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
+            sources = { 'nvim_diagnostic', 'coc', 'nvim_lsp' },
 
-						symbols = { error = ' ', warn = ' ', hint = ' ' },
-						colored = false, -- Displays diagnostics status in color if set to true.
-						update_in_insert = true, -- Update diagnostics in insert mode.
-						always_visible = true, -- Show diagnostics even if there are none.
-					},
-				},
-			},
-		}
-	end,
+            -- Displays diagnostics for the defined severity types
+            sections = { 'error', 'warn', 'hint' },
+
+            symbols = { error = ' ', warn = ' ', hint = ' ' },
+            colored = false, -- Displays diagnostics status in color if set to true.
+            update_in_insert = true, -- Update diagnostics in insert mode.
+            always_visible = true, -- Show diagnostics even if there are none.
+          },
+        },
+      },
+    }
+  end,
 }

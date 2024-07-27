@@ -8,11 +8,11 @@ vim.cmd [[
 
 -- Plugin configuration
 return {
-	'lukas-reineke/virt-column.nvim',
-	opts = {
-		enable = true,
-		char = { '│' },
-		virtcolumn = '120',
-		highlight = 'MyVirtColumn',
-	},
+  'lukas-reineke/virt-column.nvim',
+  opts = {
+    enable = true,
+    char = { '│' },
+    virtcolumn = '120',
+    highlight = 'MyVirtColumn',
+  },
 }

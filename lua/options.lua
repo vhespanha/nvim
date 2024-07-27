@@ -75,10 +75,10 @@ vim.opt.cursorline = true
 vim.o.cmdheight = 0
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-	pattern = '*.json',
-	callback = function()
-		vim.bo.filetype = 'jsonc'
-	end,
+  pattern = '*.json',
+  callback = function()
+    vim.bo.filetype = 'jsonc'
+  end,
 })
 
 vim.wo.wrap = false

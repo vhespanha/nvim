@@ -137,7 +137,15 @@ return {
         },
         sources = {
           { name = 'copilot', group_index = 2 },
-          { name = 'nvim_lsp', group_index = 2 },
+          {
+            name = 'nvim_lsp',
+            group_index = 2,
+            option = {
+              markdown_oxide = {
+                keyword_pattern = [[\(\k\| \|\/\|#\)\+]],
+              },
+            },
+          },
           { name = 'path', group_index = 2 },
           { name = 'luasnip', group_index = 2 },
         },

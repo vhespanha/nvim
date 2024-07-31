@@ -2,7 +2,7 @@
 i'll think of something cool to put here
 --]]
 
-vim.env.PATH = vim.env.PATH .. ':/home/vhespanha/.nvm/versions/node/v22.4.1/bin'
+vim.env.PATH = vim.env.PATH .. ':/home/vhespanha/.nvm/versions/node/v20.16.0/bin'
 
 -- Set <space> as the leader key
 -- See `:help mapleader`

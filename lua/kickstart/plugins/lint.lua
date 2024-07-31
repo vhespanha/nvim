@@ -15,6 +15,7 @@ return {
         python = { 'flake8' },
         bash = { 'shellcheck' },
         sh = { 'shellcheck' },
+        markdown = { 'markdownlint-cli2' },
       }
 
       local eslint_d = require('lint').linters.eslint_d

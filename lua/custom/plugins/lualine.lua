@@ -68,26 +68,6 @@ return {
       end,
     }
 
-    local function get_relative_path_from_project_root()
-      local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
-      local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
-
-      -- Check if the buffer is a dashboard or an empty fileless buffer
-      if filetype == 'alpha' or buftype == 'nofile' then
-        return ''
-      end
-
-      local project_root = vim.fn.getcwd()
-      if project_root and project_root ~= '' then
-        local file_path = vim.fn.expand '%:p'
-        local relative_path = file_path:sub(#project_root + 2)
-        local project_root_name = vim.fn.fnamemodify(project_root, ':t')
-        return project_root_name .. '/' .. relative_path
-      else
-        return vim.fn.expand '%:p'
-      end
-    end
-
     local harpoonline = { Harpoonline.format }
     require('lualine').setup {
       extensions = { 'nvim-tree', 'trouble', 'toggleterm' },
@@ -138,9 +118,6 @@ return {
           {
             'filename',
             path = 1, -- 1 means relative path
-            fmt = function()
-              return get_relative_path_from_project_root()
-            end,
           },
           {
             'branch',

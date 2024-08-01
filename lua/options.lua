@@ -74,6 +74,8 @@ vim.opt.cursorline = true
 -- Hide the built-in command-line
 vim.o.cmdheight = 0
 
+vim.opt.conceallevel = 2
+
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = '*.json',
   callback = function()

@@ -12,6 +12,20 @@ return {
           width = 'block',
           signs = { '' },
         },
+        code = {
+          sign = false,
+          style = 'language',
+          width = 'block',
+          border = 'thin',
+          above = '',
+          below = '',
+        },
+        quote = {
+          icon = '|',
+        },
+        sign = {
+          enabled = false,
+        },
       }
     end,
   },

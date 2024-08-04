@@ -9,16 +9,9 @@ return {
         html = rainbow_delimiters.strategy['local'],
       },
       highlight = {
-        [''] = {
-          'RainbowDelimiterTransparentViolet',
-          'RainbowDelimiterTransparentBlue',
-          'RainbowDelimiterTransparentPink',
-        },
-        html = {
-          'RainbowDelimiterViolet',
-          'RainbowDelimiterBlue',
-          'RainbowDelimiterPink',
-        },
+        'RainbowDelimiterViolet',
+        'RainbowDelimiterBlue',
+        'RainbowDelimiterPink',
       },
     }
   end,

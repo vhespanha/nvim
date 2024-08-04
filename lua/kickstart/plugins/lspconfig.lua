@@ -163,7 +163,66 @@ return {
         clangd = {},
         pyright = {},
         rust_analyzer = {},
-        tsserver = {},
+        tsserver = {
+          filetypes = { 'typescript', 'typescriptreact' },
+          init_options = {
+            preferences = {
+              jsxAttributeCompletionStyle = 'none',
+              quotePreference = 'single',
+              importModuleSpecifierPreference = 'relative',
+            },
+          },
+          settings = {
+            javascript = {
+              format = {
+                semicolons = 'insert',
+              },
+              validate = {
+                enable = true,
+                lint = {
+                  unusedLabels = 'warning',
+                  unreachableCode = 'warning',
+                },
+              },
+            },
+            javascriptreact = {
+              format = {
+                semicolons = 'insert',
+              },
+              validate = {
+                enable = true,
+                lint = {
+                  unusedLabels = 'warning',
+                  unreachableCode = 'warning',
+                },
+              },
+            },
+            typescript = {
+              format = {
+                semicolons = 'insert',
+              },
+              validate = {
+                enable = true,
+                lint = {
+                  unusedLabels = 'warning',
+                  unreachableCode = 'warning',
+                },
+              },
+            },
+            typescriptreact = {
+              format = {
+                semicolons = 'insert',
+              },
+              validate = {
+                enable = true,
+                lint = {
+                  unusedLabels = 'warning',
+                  unreachableCode = 'warning',
+                },
+              },
+            },
+          },
+        },
         templ = {},
         tailwindcss = {},
         sqls = {},
@@ -177,7 +236,11 @@ return {
           },
         },
         htmx = {},
-        html = {},
+        html = {
+          init_options = {
+            provideFormatter = false,
+          },
+        },
         staticcheck = {},
         gopls = {},
         proselint = {},
@@ -187,9 +250,6 @@ return {
           filetypes = { 'markdown', 'txt', 'latex' },
         },
         lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
           settings = {
             Lua = {
               completion = {
@@ -198,8 +258,6 @@ return {
               diagnostics = {
                 globals = { 'vim' },
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },

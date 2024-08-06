@@ -51,6 +51,7 @@ return {
         latex = { 'latexindent' },
         tex = { 'latexindent' },
         markdown = { 'prettierd' },
+        gotmpl = { 'prettier' },
       },
       vim.api.nvim_create_autocmd('BufWritePre', {
         pattern = '*',

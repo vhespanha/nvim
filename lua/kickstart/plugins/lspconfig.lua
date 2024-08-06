@@ -240,9 +240,12 @@ return {
           init_options = {
             provideFormatter = false,
           },
+          filetypes = { 'html', 'gotmpl' },
         },
         staticcheck = {},
-        gopls = {},
+        gopls = {
+          filetypes = { 'go', 'gomod' },
+        },
         proselint = {},
         eslint_d = {},
         prettierd = {},

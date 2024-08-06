@@ -16,6 +16,7 @@ return {
         bash = { 'shellcheck' },
         sh = { 'shellcheck' },
         markdown = { 'markdownlint-cli2' },
+        gotmpl = { 'eslint' },
       }
 
       local eslint_d = require('lint').linters.eslint_d

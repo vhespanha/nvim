@@ -2,6 +2,7 @@ return {
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    lazy = false,
     opts = {
       ensure_installed = {
         'bash',
@@ -16,7 +17,6 @@ return {
         'go',
         'gomod',
         'gosum',
-        'gotmpl',
         'tsx',
         'typescript',
         'sql',
@@ -34,17 +34,7 @@ return {
       },
     },
     config = function(_, opts)
-      local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-      parser_config.gotmpl = {
-        install_info = {
-          url = 'https://github.com/qvalentin/tree-sitter-go-template',
-          files = { 'src/parser.c' },
-        },
-        filetype = 'gotmpl',
-        used_by = { 'gohtmltmpl', 'gotexttmpl', 'gotmpl' },
-      }
       require('nvim-treesitter.install').prefer_git = true
-      ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
     end,
   },

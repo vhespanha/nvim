@@ -13,8 +13,5 @@ return { -- You can easily change to a different colorscheme.
       vim.cmd.colorscheme 'dngh_dark_default'
     end,
   },
-  {
-    'rktjmp/lush.nvim',
-  },
 }
 -- vim: ts=2 sts=2 sw=2 et

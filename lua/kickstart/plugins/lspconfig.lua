@@ -163,6 +163,7 @@ return {
         clangd = {},
         pyright = {},
         rust_analyzer = {},
+        golangci_lint_ls = {},
         tsserver = {
           filetypes = { 'typescript', 'typescriptreact' },
           init_options = {
@@ -224,8 +225,9 @@ return {
           },
         },
         templ = {},
-        tailwindcss = {},
-        sqls = {},
+        tailwindcss = {
+          filetypes = { 'html', 'gohtml', 'svelte', 'typescriptreact', 'javascriptreact', 'templ' },
+        },
         jsonls = {
           format = {
             enable = true,
@@ -240,7 +242,6 @@ return {
           init_options = {
             provideFormatter = false,
           },
-          filetypes = { 'html', 'gotmpl' },
         },
         staticcheck = {},
         gopls = {
@@ -249,8 +250,14 @@ return {
         proselint = {},
         eslint_d = {},
         prettierd = {},
+        sqls = {
+          provideFormatter = true,
+        },
         harper_ls = {
-          filetypes = { 'markdown', 'txt', 'latex' },
+          filetypes = { 'txt', 'latex' },
+        },
+        ltex = {
+          filetypes = { 'tex', 'latex' },
         },
         lua_ls = {
           settings = {
